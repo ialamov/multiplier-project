@@ -1,11 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Inject, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CategoriasController } from './categorias.controller';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
 @Injectable()
 export class CategoriasService {
-  create(createCategoriaDto: CreateCategoriaDto) {
-    return 'This action adds a new categoria';
+  create(
+    @Body()
+    {
+      codigo,
+      titulo,
+      status,
+    }: {
+      codigo: string;
+      titulo: string;
+      status: number;
+    },
+  ) {
+    const newCategoria = {
+      codigo,
+      titulo,
+      status,
+    };
+    return newCategoria;
   }
 
   findAll() {
@@ -23,4 +41,12 @@ export class CategoriasService {
   remove(id: number) {
     return `This action removes a #${id} categoria`;
   }
+
+  verifyCategoriaLengthIdList(categoriasController: CategoriasController) {
+    console.log(categoriasController.findAllCategorias);
+  }
+
+  // verifyCategoriaCodigo(@Body() codigo: string, categoriasController: CategoriasController) {
+  //   const filteredCodigo = categoriasController.findAllCategorias
+  // }
 }
