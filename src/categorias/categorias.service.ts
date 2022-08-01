@@ -1,7 +1,6 @@
-import { Body, Inject, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Body, Injectable } from '@nestjs/common';
+import { AutoIncrement } from 'sequelize-typescript';
 import { CategoriasController } from './categorias.controller';
-import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
 @Injectable()
@@ -19,6 +18,7 @@ export class CategoriasService {
     },
   ) {
     const newCategoria = {
+      id: AutoIncrement,
       codigo,
       titulo,
       status,
